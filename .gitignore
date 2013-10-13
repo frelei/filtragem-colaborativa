@@ -1,3 +1,7 @@
+# Eclipse project files
+.settings/
+.metadata/
+
 *.class
 
 # Package Files #
