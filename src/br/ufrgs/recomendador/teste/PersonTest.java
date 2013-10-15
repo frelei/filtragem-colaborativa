@@ -40,9 +40,7 @@ public class PersonTest {
 		u4.add(new Item(2, 5));
 		u4.add(new Item(3, 5));
 		u4.add(new Item(4, 5));
-		
-		
-		
+
 	}
 	
 	
@@ -50,7 +48,6 @@ public class PersonTest {
 	public void testCorrelation() {
 		Person p = new Person(u1, u2);
 		float corr = p.correlation();
-		System.out.println(corr);
 		assertEquals(0.816, corr, 0.01);
 	}
 
@@ -58,7 +55,6 @@ public class PersonTest {
 	public void testCorrelationEquals() {
 		Person p = new Person(u1, u1);
 		float corr = p.correlation();
-		System.out.println(corr);
 		assertEquals(1, corr, 0.01);
 	}
 	
@@ -66,8 +62,18 @@ public class PersonTest {
 	public void testCorrelationOposite() {
 		Person p = new Person(u3, u4);
 		float corr = p.correlation();
-		System.out.println(corr);
 		assertEquals(0, corr, 0.01);
 	}
 	
+	@Test
+	public void testCorrelationOrder() {
+		Person p1 = new Person(u1, u2);
+		Person p2 = new Person(u2, u1);
+		float corr1 = p1.correlation();
+		float corr2 = p2.correlation();
+		
+		//System.out.println(corr);
+		assertEquals(corr1, corr2, 0.01);
+	}
+		
 }

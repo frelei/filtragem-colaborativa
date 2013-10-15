@@ -25,9 +25,10 @@ public class Person {
 	}	
 
 	public float correlation(){
-		float dividendo = 0 , divisorP1 = 0, divisorP2 = 0, divisor = 0;
-		float corr = 0, p1 = 0, p2 = 0;	
+		float dividendo = 0 , divisorP1 = 0, divisorP2 = 0, divisor = 0, corr = 0;
+		float p1 = 0, p2 = 0;	
 		int index = 0;
+		
 		for (Item i1 : u1) {
 			index = u2.indexOf(i1);
 			if(index != -1){
@@ -50,6 +51,14 @@ public class Person {
 		return corr;
 	}
 	
+	/**
+	 *  Avalia se Lista de itens tem mesma quantidade e 
+	 *  	mesmo itens
+	 * @return
+	 */
+	private boolean checkItens(){
+		return true;
+	}
 	
 	
 }
