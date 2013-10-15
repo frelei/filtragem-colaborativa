@@ -23,7 +23,7 @@ public class FiltragemTest {
 		u1.add(new Item(2, 1));
 		u1.add(new Item(3, 1));
 		u1.add(new Item(4, 1));
-		
+				
 		u2.add(new Item(5, 2));
 		u2.add(new Item(2, 2));
 		u2.add(new Item(3, 2));
