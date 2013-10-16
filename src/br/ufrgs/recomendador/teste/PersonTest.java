@@ -17,7 +17,7 @@ public class PersonTest {
 	private List<Item> u2 = new ArrayList<Item>();
 	private List<Item> u3 = new ArrayList<Item>();
 	private List<Item> u4 = new ArrayList<Item>();
-	
+	private List<Item> u5 = new ArrayList<Item>();
 	
 	@Before
 	public void init(){
@@ -40,7 +40,12 @@ public class PersonTest {
 		u4.add(new Item(2, 5));
 		u4.add(new Item(3, 5));
 		u4.add(new Item(4, 5));
-
+		
+		u5.add(new Item(1, 0));
+		u5.add(new Item(2, 0));
+		u5.add(new Item(3, 0));
+		u5.add(new Item(4, 0));
+		
 	}
 	
 	
@@ -71,9 +76,17 @@ public class PersonTest {
 		Person p2 = new Person(u2, u1);
 		float corr1 = p1.correlation();
 		float corr2 = p2.correlation();
-		
-		//System.out.println(corr);
 		assertEquals(corr1, corr2, 0.01);
 	}
-		
+	
+	@Test
+	public void testCorrelationZero() {
+		Person p1 = new Person(u5, u1);
+		Person p2 = new Person(u5, u5);
+		float corr1 = p1.correlation();
+		float corr2 = p2.correlation();
+		assertEquals(0, corr1, 0.01);
+		assertEquals(0, corr2, 0.01);
+	}
+	
 }

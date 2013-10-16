@@ -21,7 +21,7 @@ public class User {
 	public User(int id, float similarityRatio, List<Item> item){
 		this.id = id;
 		this.item = item;
-		this.similarityRatio = similarityRatio;
+		setSimilarityRatio(similarityRatio);
 	}
 
 	public void findSimilares(Collection<User> users){
@@ -52,6 +52,27 @@ public class User {
 		this.item = item;
 	}
 
+	public List<SimilarUser> getSimilares() {
+		return similares;
+	}
+
+	public void setSimilares(List<SimilarUser> similares) {
+		this.similares = similares;
+	}
+
+	public float getSimilarityRatio() {
+		return similarityRatio;
+	}
+
+	public void setSimilarityRatio(float similarityRatio) {
+		if(similarityRatio < 0)
+			this.similarityRatio = 0;
+		else if(similarityRatio > 5)
+			this.similarityRatio = 5;
+		else
+			this.similarityRatio = similarityRatio;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -72,5 +93,13 @@ public class User {
 		if (id != other.id)
 			return false;
 		return true;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + "]";
+	}
+	
+	
+	
 }

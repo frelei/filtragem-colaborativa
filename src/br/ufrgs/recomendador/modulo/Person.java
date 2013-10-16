@@ -20,8 +20,8 @@ public class Person {
 	public Person(List<Item> u1, List<Item> u2){
 		this.u1 = u1;
 		this.u2 = u2;
-		this.averageU1 = Average.media(u1);
-		this.averageU2 = Average.media(u2);
+		this.averageU1 = Util.average( Util.getCommon(u1, u2) );
+		this.averageU2 = Util.average( Util.getCommon(u2, u1) );
 	}	
 
 	public float correlation(){
@@ -42,7 +42,7 @@ public class Person {
 		}
 		divisor = (float) ( Math.sqrt( (divisorP1 * divisorP2) ) ); 
 		if(divisor <= 0 || dividendo <= 0 ){
-			corr = 0;
+			corr = 0; 
 		}else{
 			corr = 	dividendo / divisor;
 			//BigDecimal number = new BigDecimal(Float.toString(dividendo / divisor)).setScale(3,BigDecimal.ROUND_HALF_DOWN);
@@ -50,15 +50,5 @@ public class Person {
 		}
 		return corr;
 	}
-	
-	/**
-	 *  Avalia se Lista de itens tem mesma quantidade e 
-	 *  	mesmo itens
-	 * @return
-	 */
-	private boolean checkItens(){
-		return true;
-	}
-	
 	
 }
