@@ -7,16 +7,15 @@ import java.util.Set;
 
 public class Prediction {
 
-	//private List<Predito> itemNotCommon;
-	private float averageUserWithSimilarities;
-	
+	private List<Predito> itemNotCommon;
+		
 	public Prediction(User user){
-		//this.itemNotCommon = findItemNotCommon(user);
-		this.averageUserWithSimilarities = averageUserItemsCommonWithAll(user);
+		this.itemNotCommon = findItemToRecomendation(user);
 	}
 	
 	public List<Predito> findItemToRecomendation(User user){
 		List<Predito> notCommon = new ArrayList<Predito>();
+		float averageUserWithSimilarities = averageUserItemsCommonWithAll(user);
 		
 		for(SimilarUser similar : user.getSimilares()){
 			for(Item i : similar.getUser().getItem())
@@ -68,4 +67,13 @@ public class Prediction {
 		}
 		return Util.average(similarCommon);
 	}
+
+	/**
+	 * Retorna lista de Itens recomendados
+	 * @return
+	 */
+	public List<Predito> getItemNotCommon() {
+		return itemNotCommon;
+	}
+
 }
