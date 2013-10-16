@@ -19,6 +19,11 @@ public class PersonTest {
 	private List<Item> u4 = new ArrayList<Item>();
 	private List<Item> u5 = new ArrayList<Item>();
 	
+	private List<Item> i = new ArrayList<Item>();
+	private List<Item> a = new ArrayList<Item>();
+	private List<Item> b = new ArrayList<Item>();
+	private List<Item> c = new ArrayList<Item>();
+	
 	@Before
 	public void init(){
 		u1.add(new Item(1, 3));
@@ -46,6 +51,33 @@ public class PersonTest {
 		u5.add(new Item(3, 0));
 		u5.add(new Item(4, 0));
 		
+		i.add(new Item(1, 1));
+		i.add(new Item(2, 2));
+		i.add(new Item(3, 3));
+		i.add(new Item(4, 4));
+		i.add(new Item(5, 5));
+		i.add(new Item(6, 6));
+		
+		b.add(new Item(1, 1));
+		b.add(new Item(2, 2));
+		b.add(new Item(3, 3));
+		b.add(new Item(4, 4));
+		b.add(new Item(5, 5));
+		b.add(new Item(6, 6));
+		b.add(new Item(7, 7));
+		b.add(new Item(8, 8));
+	
+		c.add(new Item(1, 1));
+		c.add(new Item(8, 2));
+		c.add(new Item(10, 3));
+		c.add(new Item(4, 4));
+		c.add(new Item(5, 5));
+		c.add(new Item(30, 6));
+		c.add(new Item(7, 7));
+		c.add(new Item(8, 8));
+		
+		a.add(new Item(40, 0));
+		a.add(new Item(40, 0));
 	}
 	
 	
@@ -89,4 +121,16 @@ public class PersonTest {
 		assertEquals(0, corr2, 0.01);
 	}
 	
+	
+	@Test
+	public void testGetCommon() {
+		List<Item> r = new Person(u1,u2).getCommon(b, c);
+		List<Item> s = new Person(u1,u2).getCommon(c, b);
+		List<Item> k = new Person(u1,u2).getCommon(a, i);
+		List<Item> l = new Person(u1,u2).getCommon(i, a);
+		assertEquals(5, r.size());
+		assertEquals(5, s.size());
+		assertEquals(0, k.size());
+		assertEquals(0, l.size());
+	}
 }

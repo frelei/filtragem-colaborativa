@@ -1,6 +1,9 @@
 package br.ufrgs.recomendador.modulo;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Calcula a similaridade entre dois usuarios
@@ -20,10 +23,27 @@ public class Person {
 	public Person(List<Item> u1, List<Item> u2){
 		this.u1 = u1;
 		this.u2 = u2;
-		this.averageU1 = Util.average( Util.getCommon(u1, u2) );
-		this.averageU2 = Util.average( Util.getCommon(u2, u1) );
+		this.averageU1 = Util.average( getCommon(u1, u2) );
+		this.averageU2 = Util.average( getCommon(u2, u1) );
 	}	
 
+	/**
+	 * Retorna uma lista de itens que há em comum entre as duas listas
+	 * L1 = {1,2,3,4}
+	 * L2 = {2,5,4,6}
+	 * getCommon(L1,L2) = {2, 4}
+	 * 
+	 * @param u1
+	 * @param u2
+	 * @return List
+	 */
+	public List<Item> getCommon(List<Item> u1, List<Item> u2){
+		Set<Item> common1to2 = new HashSet<Item>(u1);
+		common1to2.retainAll(u2);
+		return new ArrayList<Item>(common1to2);
+	}
+	
+	
 	public float correlation(){
 		float dividendo = 0 , divisorP1 = 0, divisorP2 = 0, divisor = 0, corr = 0;
 		float p1 = 0, p2 = 0;	

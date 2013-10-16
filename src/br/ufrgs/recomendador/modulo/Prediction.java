@@ -7,24 +7,33 @@ import java.util.Set;
 
 public class Prediction {
 
-	private List<Predito> itemNotCommon;
-	private float averageUserWithSimilarties;
+	//private List<Predito> itemNotCommon;
+	private float averageUserWithSimilarities;
 	
 	public Prediction(User user){
-		this.itemNotCommon = findItemNotCommon(user);
-		this.averageUserWithSimilarties = averageUserItemsCommonWithAll(user);
+		//this.itemNotCommon = findItemNotCommon(user);
+		this.averageUserWithSimilarities = averageUserItemsCommonWithAll(user);
 	}
 	
-	
-	public List<Predito> findItemNotCommon(User user){
-		Set<Predito> notCommon = new HashSet<Predito>();
+	public List<Predito> findItemToRecomendation(User user){
+		List<Predito> notCommon = new ArrayList<Predito>();
 		
 		for(SimilarUser similar : user.getSimilares()){
 			for(Item i : similar.getUser().getItem())
-				if(! user.getItem().contains(i))
-					notCommon.add(new Predito(i.getId()));
+				if(! user.getItem().contains(i)){
+					if(!notCommon.contains(i)){
+						Predito p = new Predito(i.getId(),averageUserWithSimilarities);
+						p.calc(averageSimilarToUser(user, similar.getUser()),
+								similar.getCorrelation(), i.getAvaliacao());
+						notCommon.add(p);
+					}else{
+						Predito ref = notCommon.get(notCommon.indexOf(i));
+						ref.calc(averageSimilarToUser(user, similar.getUser()),
+											similar.getCorrelation(), i.getAvaliacao());
+					}
+				}
 		}
-		return new ArrayList<Predito>(notCommon);
+		return notCommon;
 	}
 	
 	/**
@@ -51,7 +60,7 @@ public class Prediction {
 	 * 	considerando artigos em comum com o usuário-alvo a.
 	 * 
 	 */
-	public float averageSimilarUserCommonWithUser(User user, User similar){
+	public float averageSimilarToUser(User user, User similar){
 		Set<Item> similarCommon = new HashSet<Item>();
 		for( Item i : similar.getItem() ){
 			if(user.getItem().contains(i) &&  !similarCommon.contains(i))

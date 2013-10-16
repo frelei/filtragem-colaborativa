@@ -57,6 +57,7 @@ public class UtilTest {
 		assertEquals(respA, 0, 0.0);
 	}
 
+	/*
 	@Test
 	public void testGetCommon() {
 		List<Item> r = Util.getCommon(b, c);
@@ -68,7 +69,6 @@ public class UtilTest {
 		assertEquals(0, k.size());
 		assertEquals(0, l.size());
 	}
-
-	
+*/
 	
 }

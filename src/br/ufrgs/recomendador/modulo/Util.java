@@ -1,10 +1,6 @@
 package br.ufrgs.recomendador.modulo;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public final class Util {
 
@@ -35,11 +31,11 @@ public final class Util {
 	 * @param u1
 	 * @param u2
 	 * @return List
-	 */
+	
 	public static List<Item> getCommon(List<Item> u1, List<Item> u2){
 		Set<Item> common1to2 = new HashSet<Item>(u1);
 		common1to2.retainAll(u2);
 		return new ArrayList<Item>(common1to2);
 	}
-
+	 */
 }

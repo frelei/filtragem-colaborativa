@@ -11,7 +11,7 @@ package br.ufrgs.recomendador.modulo;
 public class Item {
 
 	private int id; // identificador
-	private float avaliacao; // avaliação
+	private int avaliacao; // avaliação
 	
 	
 	public Item(int id, int avaliacao){
@@ -27,11 +27,11 @@ public class Item {
 		this.id = id;
 	}
 
-	public float getAvaliacao() {
+	public int getAvaliacao() {
 		return avaliacao;
 	}
 
-	public void setAvaliacao(float avaliacao) {
+	public void setAvaliacao(int avaliacao) {
 		if(avaliacao <= 0)
 			this.avaliacao = 0;
 		else
