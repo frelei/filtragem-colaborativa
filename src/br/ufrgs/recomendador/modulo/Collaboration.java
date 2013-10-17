@@ -8,7 +8,7 @@ public class Collaboration {
 	
 	public Collaboration(User user, List<User> base){
 		user.findSimilares(base);
-		this.preditos = new Prediction(user).getItemNotCommon();
+		this.preditos = new Prediction(user).findItemToRecomendation();
 	}
 
 	/**

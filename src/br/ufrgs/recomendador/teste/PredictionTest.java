@@ -9,21 +9,24 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.ufrgs.recomendador.modulo.Item;
+import br.ufrgs.recomendador.modulo.Prediction;
+import br.ufrgs.recomendador.modulo.Predito;
 import br.ufrgs.recomendador.modulo.User;
 
-public class UserTest {
+public class PredictionTest {
 
 	private List<Item> l1 = new ArrayList<Item>();
 	private List<Item> l2 = new ArrayList<Item>();
 	private List<Item> l3 = new ArrayList<Item>();
 	private List<Item> l4 = new ArrayList<Item>();
 	private List<Item> l5 = new ArrayList<Item>();
+	private List<User> lista = new ArrayList<User>();
 	private User u1;
 	private User u2;
 	private User u3;
 	private User u4;
 	private User u5;
-	private List<User> lista = new ArrayList<User>();
+	
 	
 	@Before
 	public void init(){
@@ -66,12 +69,35 @@ public class UserTest {
 		lista.add(u4);
 		lista.add(u5);
 		
+		u1.findSimilares(lista);
+		u2.findSimilares(lista);
+		u3.findSimilares(lista);
+		u4.findSimilares(lista);
+		u5.findSimilares(lista);
+		
 	}
 	
+	
 	@Test
-	public void testUser() {
-		u1.findSimilares(lista);
-		assertEquals(2, u1.getSimilares().size());
+	public void testAverageUserItemsCommonWithAll() {
+		float resp = Prediction.averageUserItemsCommonWithAll(u1);
+		assertEquals(3, resp, 0.0);
 	}
 
+	@Test
+	public void testAverageSimilarToUser() {
+		float resp = Prediction.averageSimilarToUser(u1, u2);
+		assertEquals(3.5, resp, 0.0);
+	}
+
+	@Test
+	public void testFindItemToRecomendation() {
+		Prediction p = new Prediction(u1);
+		List<Predito> pre = p.findItemToRecomendation();
+		assertEquals(1, pre.size());
+		assertEquals(2.8, pre.get(0).getPrediction(), 0.1);
+		
+	}
+	
+	
 }

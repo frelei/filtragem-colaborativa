@@ -7,26 +7,26 @@ import java.util.Set;
 
 public class Prediction {
 
-	private List<Predito> itemNotCommon;
-		
+	private User user;
+	
 	public Prediction(User user){
-		this.itemNotCommon = findItemToRecomendation(user);
+		this.user = user;
 	}
 	
-	public List<Predito> findItemToRecomendation(User user){
+	public List<Predito> findItemToRecomendation(){
 		List<Predito> notCommon = new ArrayList<Predito>();
 		float averageUserWithSimilarities = averageUserItemsCommonWithAll(user);
 		
 		for(SimilarUser similar : user.getSimilares()){
 			for(Item i : similar.getUser().getItem())
 				if(! user.getItem().contains(i)){
-					if(!notCommon.contains(i)){
-						Predito p = new Predito(i.getId(),averageUserWithSimilarities);
+					Predito p = new Predito(i.getId(),averageUserWithSimilarities);
+					if(! notCommon.contains(p)){
 						p.calc(averageSimilarToUser(user, similar.getUser()),
 								similar.getCorrelation(), i.getAvaliacao());
 						notCommon.add(p);
 					}else{
-						Predito ref = notCommon.get(notCommon.indexOf(i));
+						Predito ref = notCommon.get(notCommon.indexOf(p));
 						ref.calc(averageSimilarToUser(user, similar.getUser()),
 											similar.getCorrelation(), i.getAvaliacao());
 					}
@@ -41,12 +41,14 @@ public class Prediction {
 	 * @param user
 	 * @return
 	 */
-	public float averageUserItemsCommonWithAll(User user){
+	public static float averageUserItemsCommonWithAll(User user){
 		Set<Item> commonWithAll = new HashSet<Item>();
+		int index = 0;
 		for(SimilarUser s : user.getSimilares()){
 			for(Item i : s.getUser().getItem()){
-				if(user.getItem().contains(i))
-					commonWithAll.add(i);
+				index = user.getItem().indexOf(i);
+				if(index != -1)
+					commonWithAll.add(user.getItem().get(index));
 			}
 		}
 		return Util.average(commonWithAll);
@@ -59,21 +61,17 @@ public class Prediction {
 	 * 	considerando artigos em comum com o usuário-alvo a.
 	 * 
 	 */
-	public float averageSimilarToUser(User user, User similar){
+	public static float averageSimilarToUser(User user, User similar){
 		Set<Item> similarCommon = new HashSet<Item>();
+		
 		for( Item i : similar.getItem() ){
-			if(user.getItem().contains(i) &&  !similarCommon.contains(i))
+			if(user.getItem().contains(i) && !similarCommon.contains(i)){
 				similarCommon.add(i);
+			}
 		}
 		return Util.average(similarCommon);
 	}
 
-	/**
-	 * Retorna lista de Itens recomendados
-	 * @return
-	 */
-	public List<Predito> getItemNotCommon() {
-		return itemNotCommon;
-	}
+	
 
 }

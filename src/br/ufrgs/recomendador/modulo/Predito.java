@@ -20,7 +20,7 @@ public class Predito {
 	
 	public void calc(float rb, float corr, int avaliation){
 		this.dividendo += (avaliation - rb) * corr;
-		this.dividendo += Math.abs(corr); 
+		this.divisor += Math.abs(corr); 
 	}
 	
 	// getters e setters
@@ -36,7 +36,7 @@ public class Predito {
 	 * @return float
 	 */
 	public float getPrediction() {
-		return this.averageUserBySimilarities + this.dividendo / this.divisor;
+		return this.averageUserBySimilarities + (this.dividendo / this.divisor);
 	}
 	
 	

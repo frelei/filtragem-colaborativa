@@ -29,6 +29,7 @@ public class User {
 		for (User user : users) {
 			if(user.getId() != this.id){
 			   SimilarUser similarUser = new SimilarUser(this, user);
+			//   System.out.println("id: "+user.getId()+ ", corr: "+similarUser.getCorrelation());
 			   if(similarUser.getCorrelation() >= this.similarityRatio)
 				   	this.similares.add(similarUser);
 			}

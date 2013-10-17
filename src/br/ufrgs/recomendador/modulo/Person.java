@@ -61,7 +61,7 @@ public class Person {
 			}
 		}
 		divisor = (float) ( Math.sqrt( (divisorP1 * divisorP2) ) ); 
-		if(divisor <= 0 || dividendo <= 0 ){
+		if(divisor == 0 || dividendo == 0 ){
 			corr = 0; 
 		}else{
 			corr = 	dividendo / divisor;
